@@ -9,10 +9,11 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { PersonStandingIcon } from "lucide-react";
+import { CalendarIcon, PersonStandingIcon } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import Link from "next/link";
+import { format } from "date-fns";
 import { useForm } from "react-hook-form";
 import z from "zod";
 import {
@@ -26,6 +27,20 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { PasswordInput } from "@/components/ui/password-input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Calendar } from "@/components/ui/calendar";
 
 const formSchema = z
   .object({
@@ -33,9 +48,11 @@ const formSchema = z
     accountType: z.enum(["personal", "company"]),
     companyName: z.string().optional(),
     numberOfEmployees: z.coerce.number().optional(),
-    acceptTerms: z.boolean({
-      required_error: "You must accept the terms and conditions",
-    }),
+    acceptTerms: z
+      .boolean({
+        required_error: "You must accept the terms and conditions",
+      })
+      .refine((checked) => checked, "You must accept the terms and conditions"),
     dob: z.date().refine((date) => {
       const today = new Date();
       const eighteedYearsAgo = new Date(
@@ -89,12 +106,19 @@ export default function SignUpPage() {
     defaultValues: {
       email: "",
       password: "",
+      passwordConfirm: "",
+      companyName: "",
     },
   });
 
   const handleSubmit = () => {
     console.log("login validation passed");
   };
+
+  const accountType = form.watch("accountType");
+
+  const dobFromDate = new Date();
+  dobFromDate.setFullYear(dobFromDate.getFullYear() - 120);
 
   return (
     <>
@@ -120,34 +144,40 @@ export default function SignUpPage() {
                     <FormControl>
                       <Input placeholder="john@doe.com" {...field} />
                     </FormControl>
-                    <FormDescription>
-                      This is the email address you signed up to SupportMe with
-                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
               />
               <FormField
                 control={form.control}
-                name="password"
+                name="accountType"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Password</FormLabel>
-                    <FormControl>
-                      <PasswordInput placeholder="••••••••" {...field} />
-                    </FormControl>
+                    <FormLabel>Account type</FormLabel>
+                    <Select onValueChange={field.onChange}>
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select an account type" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="personal">Personal</SelectItem>
+                        <SelectItem value="company">Company</SelectItem>
+                      </SelectContent>
+                    </Select>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              <Button type="submit">Login</Button>
+
+              <Button type="submit">Sign up</Button>
             </form>
           </Form>
         </CardContent>
         <CardFooter className="justify-between">
-          <small>Don't have an account?</small>
+          <small>Already have an account?</small>
           <Button asChild variant="outline" size="sm">
-            <Link href="/sign-up">Sign up</Link>
+            <Link href="/login">Login</Link>
           </Button>
         </CardFooter>
       </Card>
