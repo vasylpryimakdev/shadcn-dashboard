@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/tooltip";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import Image from "next/image";
+import TeamDistributionChart from "./TeamDistributionChart";
 
 const teamLeaders = [
   {
@@ -124,7 +125,9 @@ export default function TeamsStats() {
               <PieChartIcon />
             </CardTitle>
           </CardHeader>
-          <CardContent className="pb-0">Team Describution Chart</CardContent>
+          <CardContent className="pb-0">
+            <TeamDistributionChart />
+          </CardContent>
         </Card>
       </div>
       <Card className="my-4">
