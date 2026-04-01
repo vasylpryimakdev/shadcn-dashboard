@@ -10,9 +10,26 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { PersonStandingIcon } from "lucide-react";
+import { zodResolver } from "@hookform/resolvers/zod";
+
 import Link from "next/link";
+import { useForm } from "react-hook-form";
+import z from "zod";
+
+const formSchema = z.object({
+  email: z.string().email(),
+  password: z.string(),
+});
 
 export default function Login() {
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+
   return (
     <>
       <PersonStandingIcon size={50} />
