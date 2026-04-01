@@ -27,10 +27,61 @@ import {
 import { Input } from "@/components/ui/input";
 import { PasswordInput } from "@/components/ui/password-input";
 
-const formSchema = z.object({
-  email: z.string().email(),
-  password: z.string(),
-});
+const formSchema = z
+  .object({
+    email: z.string().email(),
+    accountType: z.enum(["personal", "company"]),
+    companyName: z.string().optional(),
+    numberOfEmployees: z.coerce.number().optional(),
+    acceptTerms: z.boolean({
+      required_error: "You must accept the terms and conditions",
+    }),
+    dob: z.date().refine((date) => {
+      const today = new Date();
+      const eighteedYearsAgo = new Date(
+        today.getFullYear() - 18,
+        today.getMonth(),
+        today.getDate(),
+      );
+      return date <= eighteedYearsAgo;
+    }, "You must be at least 18 years old"),
+    password: z
+      .string()
+      .min(8, "Password must contain at least 8 characters")
+      .refine((password) => {
+        // must contain at least 1 special character and 1 uppercase character
+        return /^(?=.*[!@#$%^&*])(?=.*[A-Z]).*$/.test(password);
+      }, "Password must contain at least 1 special character and 1 uppercase letter"),
+    passwordConfirm: z.string(),
+  })
+  .superRefine((data, ctx) => {
+    if (data.password !== data.passwordConfirm) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["passwordConfirm"],
+        message: "Passwords do not match",
+      });
+    }
+
+    if (data.accountType === "company" && !data.companyName) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["companyName"],
+        message: "Company name is required",
+      });
+    }
+
+    if (
+      data.accountType === "company" &&
+      (!data.numberOfEmployees || data.numberOfEmployees < 1)
+    ) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["numberOfEmployees"],
+        message: "Number of employees is required",
+      });
+    }
+  });
 
 export default function SignUpPage() {
   const form = useForm<z.infer<typeof formSchema>>({
@@ -69,19 +120,34 @@ export default function SignUpPage() {
                     <FormControl>
                       <Input placeholder="john@doe.com" {...field} />
                     </FormControl>
+                    <FormDescription>
+                      This is the email address you signed up to SupportMe with
+                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-
-              <Button type="submit">Sign up</Button>
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Password</FormLabel>
+                    <FormControl>
+                      <PasswordInput placeholder="••••••••" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <Button type="submit">Login</Button>
             </form>
           </Form>
         </CardContent>
         <CardFooter className="justify-between">
-          <small>Already have an account?</small>
+          <small>Don't have an account?</small>
           <Button asChild variant="outline" size="sm">
-            <Link href="/login">Login</Link>
+            <Link href="/sign-up">Sign up</Link>
           </Button>
         </CardFooter>
       </Card>
