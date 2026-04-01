@@ -1,6 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ListChecksIcon, StarIcon, UsersIcon } from "lucide-react";
+import {
+  ListChecksIcon,
+  PieChartIcon,
+  StarIcon,
+  UsersIcon,
+} from "lucide-react";
 import Link from "next/link";
 import cm from "@/public/images/cm.jpg";
 import tf from "@/public/images/tf.jpg";
@@ -113,7 +118,13 @@ export default function TeamsStats() {
           </CardContent>
         </Card>
         <Card>
-          <span>Team distribution</span>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-base flex justify-between items-center">
+              <span>Team distribution</span>
+              <PieChartIcon />
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="pb-0">Team Describution Chart</CardContent>
         </Card>
       </div>
       <Card className="my-4">
