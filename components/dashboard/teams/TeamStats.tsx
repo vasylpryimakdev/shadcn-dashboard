@@ -20,6 +20,7 @@ import {
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import Image from "next/image";
 import TeamDistributionChart from "./TeamDistributionChart";
+import SupportTicketsResolved from "./SupportTicketsResolved";
 
 const teamLeaders = [
   {
@@ -137,7 +138,9 @@ export default function TeamsStats() {
             <span>Support tickets resolved</span>
           </CardTitle>
         </CardHeader>
-        <CardContent className="pl-0">Support Tickets</CardContent>
+        <CardContent className="pl-0">
+          <SupportTicketsResolved />
+        </CardContent>
       </Card>
     </>
   );
