@@ -1,4 +1,5 @@
 import EmployeesStats from "@/components/dashboard/employees/EmployeesStats";
+import TeamsStats from "@/components/dashboard/teams/TeamStats";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function DashboardPage() {
@@ -11,7 +12,9 @@ export default function DashboardPage() {
       <TabsContent value="employees">
         <EmployeesStats />
       </TabsContent>
-      <TabsContent value="teams">Team Stats</TabsContent>
+      <TabsContent value="teams">
+        <TeamsStats />
+      </TabsContent>
     </Tabs>
   );
 }
