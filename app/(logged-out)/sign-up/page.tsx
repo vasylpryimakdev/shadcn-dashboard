@@ -41,6 +41,7 @@ import {
 } from "@/components/ui/popover";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Calendar } from "@/components/ui/calendar";
+import { useRouter } from "next/navigation";
 
 const formSchema = z
   .object({
@@ -65,10 +66,10 @@ const formSchema = z
     password: z
       .string()
       .min(8, "Password must contain at least 8 characters")
-      .refine((password) => {
-        // must contain at least 1 special character and 1 uppercase character
-        return /^(?=.*[!@#$%^&*])(?=.*[A-Z]).*$/.test(password);
-      }, "Password must contain at least 1 special character and 1 uppercase letter"),
+      .refine(
+        (password) => /[A-Z]/.test(password) && /[!@#$%^&*]/.test(password),
+        "Password must contain at least 1 special character and 1 uppercase letter",
+      ),
     passwordConfirm: z.string(),
   })
   .superRefine((data, ctx) => {
@@ -101,6 +102,8 @@ const formSchema = z
   });
 
 export default function SignUpPage() {
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -111,8 +114,9 @@ export default function SignUpPage() {
     },
   });
 
-  const handleSubmit = () => {
-    console.log("login validation passed");
+  const handleSubmit = (data: z.infer<typeof formSchema>) => {
+    console.log("login validation passed: ", data);
+    router.push("/dashboard");
   };
 
   const accountType = form.watch("accountType");
