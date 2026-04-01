@@ -32,7 +32,7 @@ const formSchema = z.object({
   password: z.string(),
 });
 
-export default function LoginPage() {
+export default function SignUpPage() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -50,8 +50,8 @@ export default function LoginPage() {
       <PersonStandingIcon size={50} />
       <Card className="w-full max-w-sm">
         <CardHeader>
-          <CardTitle>Login</CardTitle>
-          <CardDescription>Login to your SupportMe account</CardDescription>
+          <CardTitle>Sign up</CardTitle>
+          <CardDescription>Sign up for a new SupportMe account</CardDescription>
         </CardHeader>
 
         <CardContent>
@@ -69,34 +69,19 @@ export default function LoginPage() {
                     <FormControl>
                       <Input placeholder="john@doe.com" {...field} />
                     </FormControl>
-                    <FormDescription>
-                      This is the email address you signed up to SupportMe with
-                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              <FormField
-                control={form.control}
-                name="password"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Password</FormLabel>
-                    <FormControl>
-                      <PasswordInput placeholder="••••••••" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <Button type="submit">Login</Button>
+
+              <Button type="submit">Sign up</Button>
             </form>
           </Form>
         </CardContent>
         <CardFooter className="justify-between">
-          <small>Don't have an account?</small>
+          <small>Already have an account?</small>
           <Button asChild variant="outline" size="sm">
-            <Link href="/sign-up">Sign up</Link>
+            <Link href="/login">Login</Link>
           </Button>
         </CardFooter>
       </Card>
