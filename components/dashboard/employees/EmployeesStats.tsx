@@ -19,6 +19,7 @@ import {
 import Link from "next/link";
 import cm from "@/public/images/cm.jpg";
 import Image from "next/image";
+import WorkLocationTrends from "./WorkLocationTrends";
 
 export default function EmployeesStats() {
   const totalEmployees = 100;
@@ -96,7 +97,9 @@ export default function EmployeesStats() {
             <span>Employee work location trends</span>
           </CardTitle>
         </CardHeader>
-        <CardContent className="pl-0">Work Location Trends</CardContent>
+        <CardContent className="pl-0">
+          <WorkLocationTrends />
+        </CardContent>
       </Card>
     </>
   );
