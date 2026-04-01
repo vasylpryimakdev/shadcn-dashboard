@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import React from "react";
 
-const Homepage = () => {
+export default function Homepage() {
   return (
     <div>
       <h1>Support me</h1>
@@ -9,6 +9,4 @@ const Homepage = () => {
       <Button>Sign up</Button>
     </div>
   );
-};
-
-export default Homepage;
+}
