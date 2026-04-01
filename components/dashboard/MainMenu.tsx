@@ -1,6 +1,9 @@
 import { cn } from "@/lib/utils";
 import MenuTitle from "./MenuTitle";
 import MenuItem from "./MenuItem";
+import { Avatar, AvatarFallback } from "../ui/avatar";
+import Link from "next/link";
+import { LightDarkToggle } from "../ui/light-dark-toggle";
 
 export default function MainMenu({ className }: { className?: string }) {
   return (
@@ -18,6 +21,18 @@ export default function MainMenu({ className }: { className?: string }) {
         <MenuItem href="/dashboard/account">Account</MenuItem>
         <MenuItem href="/dashboard/settings">Settings</MenuItem>
       </ul>
+
+      <footer className="flex gap-2 items-center">
+        <Avatar>
+          <AvatarFallback className="bg-pink-300 dark:bg-pink-800">
+            TP
+          </AvatarFallback>
+        </Avatar>
+        <Link href="/" className="hover:underline">
+          Logout
+        </Link>
+        <LightDarkToggle className="ml-auto" />
+      </footer>
     </nav>
   );
 }
