@@ -1,7 +1,12 @@
-export default async function EmployeesPage() {
-  await new Promise((resolve) => setTimeout(resolve, 2000));
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { DataTable } from "@/components/ui/data-table";
+import { setTimeout } from "timers/promises";
+import { type Employee, columns } from "./columns";
 
-  const employees = [
+export default async function EmployeesPage() {
+  await setTimeout(2000);
+
+  const employees: Employee[] = [
     {
       id: 1,
       firstName: "Colin",
@@ -69,10 +74,14 @@ export default async function EmployeesPage() {
       isTeamLeader: false,
     },
   ];
-
   return (
-    <div>
-      <h2>Employees</h2>
-    </div>
+    <Card>
+      <CardHeader>
+        <CardTitle>Employees</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <DataTable columns={columns} data={employees} />
+      </CardContent>
+    </Card>
   );
 }
