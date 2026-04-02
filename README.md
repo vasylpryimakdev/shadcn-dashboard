@@ -1,36 +1,190 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Support Me Dashboard
 
-## Getting Started
+A modern, responsive dashboard application built with Next.js 14, TypeScript, and shadcn/ui components. This project demonstrates a comprehensive admin dashboard with employee and team management features, statistics visualization, and authentication.
 
-First, run the development server:
+## 🚀 Live Demo
+
+👉 [https://shadcn-dashboard-pearl.vercel.app/](https://shadcn-dashboard-pearl.vercel.app/)
+
+## 🚀 Features
+
+- **Dashboard Overview**: Interactive tabs for employee and team statistics
+- **Employee Management**: View and manage employee data with detailed statistics
+- **Team Management**: Team organization and performance metrics
+- **Authentication**: Secure login system with session management
+- **Responsive Design**: Mobile-first approach with Tailwind CSS
+- **Dark Mode**: Built-in dark theme support
+- **Modern UI**: Beautiful components using shadcn/ui and Radix UI
+
+## 🛠️ Tech Stack
+
+- **Framework**: Next.js 14 with App Router
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS with CSS variables
+- **UI Components**: shadcn/ui (Radix UI primitives)
+- **Forms**: React Hook Form with Zod validation
+- **Charts**: Recharts for data visualization
+- **Icons**: Lucide React
+- **Fonts**: Poppins from Google Fonts
+
+## 📦 Dependencies
+
+### Core Dependencies
+
+- Next.js 14.0.4
+- React 18
+- TypeScript 5
+
+### UI & Styling
+
+- @radix-ui/\* (various UI primitives)
+- tailwindcss 3.4.0
+- class-variance-authority
+- clsx & tailwind-merge
+- tailwindcss-animate
+
+### Forms & Validation
+
+- react-hook-form 7.72.0
+- @hookform/resolvers
+- zod 3.25.76
+
+### Data & Charts
+
+- @tanstack/react-table
+- recharts 2.15.4
+- date-fns 3.6.0
+
+### Additional Libraries
+
+- lucide-react (icons)
+- react-day-picker
+- react-responsive
+- vaul (drawer component)
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/vasylpryimakdev/shadcn-dashboard.git
+cd shadcn-dashboard
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📁 Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```
+├── app/                    # Next.js app directory
+│   ├── dashboard/         # Dashboard routes
+│   │   ├── account/       # Account management
+│   │   ├── employees/     # Employee management
+│   │   ├── settings/      # Application settings
+│   │   └── teams/         # Team management
+│   ├── (logged-out)/      # Authentication pages
+│   ├── globals.css        # Global styles
+│   └── layout.tsx         # Root layout
+├── components/            # Reusable UI components
+│   ├── ui/               # shadcn/ui components
+│   └── dashboard/        # Dashboard-specific components
+├── lib/                  # Utility functions
+├── public/               # Static assets
+└── tailwind.config.ts    # Tailwind configuration
+```
 
-## Learn More
+## 🎯 Available Scripts
 
-To learn more about Next.js, take a look at the following resources:
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run lint` - Run ESLint
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🎨 Customization
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Theme Customization
 
-## Deploy on Vercel
+The project uses CSS variables for theming. Modify `tailwind.config.ts` and `app/globals.css` to customize colors and styles.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Adding New Components
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+This project uses shadcn/ui for component management. Add new components using:
+
+```bash
+npx shadcn-ui@latest add [component-name]
+```
+
+## 🔧 Development
+
+### Code Style
+
+- ESLint configuration for consistent code quality
+- TypeScript for type safety
+- Prettier recommended for formatting
+
+### Component Architecture
+
+- Components are organized by feature
+- Reusable UI components in `components/ui/`
+- Dashboard-specific components in `components/dashboard/`
+
+## 📊 Features in Detail
+
+### Dashboard
+
+- **Employee Statistics**: View employee metrics, performance data, and analytics
+- **Team Statistics**: Monitor team performance, collaboration metrics
+- **Tabbed Interface**: Easy navigation between different data views
+
+### Management Sections
+
+- **Account**: User profile and account settings
+- **Employees**: Complete employee management system
+- **Teams**: Team organization and management
+- **Settings**: Application configuration
+
+## Screenshots
+
+### Preview
+
+| Auth Page                                   | Sign Up                                      | Dashboard                                        |
+| ------------------------------------------- | -------------------------------------------- | ------------------------------------------------ |
+| ![Home page](./public/screenshots/auth.png) | ![SIgn Up](./public/screenshots/sign-up.png) | ![Dashboard](./public/screenshots/dashboard.png) |
+
+| Team Stats                                   | Employees                                      |
+| ------------------------------------------- | -------------------------------------------- |
+| ![Team Stats](./public/screenshots/team-stats.png) | ![Employees](./public/screenshots/employees.png) |
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 🙏 Acknowledgments
+
+- [shadcn/ui](https://ui.shadcn.com/) for beautiful UI components
+- [Next.js](https://nextjs.org/) for the React framework
+- [Tailwind CSS](https://tailwindcss.com/) for the utility-first CSS framework
+- [Radix UI](https://www.radix-ui.com/) for accessible UI primitives
